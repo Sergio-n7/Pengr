@@ -12,11 +12,12 @@ export default function HomeScreen() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true);
         const { data } = await axios.get("/api/products");
         setLoading(false);
         setProducts(data);
       } catch (err) {
-        setError(error.message);
+        setError(err.message);
         setLoading(false);
       }
     };
@@ -25,7 +26,7 @@ export default function HomeScreen() {
   return (
     <div>
       {loading ? (
-        <LoadingBox />
+        <LoadingBox></LoadingBox>
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
