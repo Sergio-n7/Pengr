@@ -1,8 +1,18 @@
 import express from "express";
+import mongoose from "mongoose";
 
 import data from "./data.js";
+import userRouter from "./routers/userRouter.js";
 
 const app = express();
+mongoose.connect(
+  "mongodb+srv://Sergio:Igresflor3638@cluster0.qb4i5.mongodb.net/TheOriginalBrand?retryWrites=true&w=majority",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+  }
+);
 
 app.get("/api/products", (req, res) => {
   res.send(data.products);
@@ -15,9 +25,14 @@ app.get("/api/products/:id", (req, res) => {
     res.status(404).send({ message: "Product not Found" });
   }
 });
-
+app.use("/api/users", userRouter);
 app.get("/", (req, res) => {
   res.send("Server is ready");
+});
+
+// eslint-disable-next-line no-unused-vars
+app.use((err, req, res, next) => {
+  res.status(500).send({ message: err.message });
 });
 
 const port = process.env.PORT || 5000;
