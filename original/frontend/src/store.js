@@ -5,7 +5,7 @@ import {
   productDetailsReducer,
   productListReducers,
 } from "./reducers/productReducers";
-import { userSigninReduder } from "./reducers/userReducer";
+import { userRegisterReduder, userSigninReduder } from "./reducers/userReducer";
 
 const initialState = {
   userSignin: {
@@ -24,6 +24,7 @@ const reducer = combineReducers({
   productDetails: productDetailsReducer,
   cart: cartReducer,
   userSignin: userSigninReduder,
+  userRegister: userRegisterReduder,
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
